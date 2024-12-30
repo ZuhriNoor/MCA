@@ -3,7 +3,7 @@
 
 void displayGraph();
 void createGraph();
-void bfs();
+void dfs();
 
 int graph[100][100] = {0}, vertices;
 
@@ -13,12 +13,12 @@ int main()
     scanf("%d", &vertices);
     createGraph();
     displayGraph();
-    bfs();
+    dfs();
 }
 
-void bfs()
+void dfs()
 {
-    int queue[vertices], visited[vertices], front = 0, rear = 0, pop, start;
+    int stack[vertices], visited[vertices], top=0, pop, start;
 
     for (int i = 0; i < vertices; i++)
     {
@@ -27,17 +27,17 @@ void bfs()
 
     printf("Enter the vertex to start bfs from: ");
     scanf("%d", &start);
-    queue[rear] = start;
+    stack[top] = start;
     visited[start] = 1;
-    while (front <= rear)
+    while (top >= 0)
     {
-        pop = queue[front++];
+        pop = stack[top--];
         printf("%d ", pop);
         for (int i = 0; i < vertices; i++)
         {
             if (graph[pop][i] == 1 && !visited[i])
             {
-                queue[++rear] = i;
+                stack[++top] = i;
                 visited[i] = 1;
             }
         }
