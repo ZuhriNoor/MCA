@@ -3,18 +3,22 @@ class Bankaccount:
         self.accno = accno
         self.name = name
         self.acctype = acctype
-        self.balance = balance
-    def checkbalance(self):
-        return self.balance
-    def withdraw(self,amount):
-        self.balance-=amount
-    def deposit(self,amount):
-        self.balance+=amount
+        self.__balance = balance
+        
+    def getBalance(self):
+        return self.__balance
+    
+    def withdraw(self, amount):
+        self.__balance-=amount
+        
+    def deposit(self, amount):
+        self.__balance+=amount
+        
     def accdetails(self):
         print(f"Account number - {self.accno}")
         print(f"Account name - {self.name}")
         print(f"Account type - {self.acctype}")
-        print(f"Account balance - {self.balance}")
+        print(f"Account balance - {self.__balance}")
         
 acc_no =  10002
 name = input("Enter account name: ")
@@ -60,7 +64,4 @@ while is_running:
         is_running = 0
     else:
         print("Invalid choice. Please try again.")
-
-
-    
 

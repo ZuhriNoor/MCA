@@ -22,7 +22,7 @@ void main()
     int is_running = 1, ch;
     while (is_running)
     {
-        printf("\n1.Add\n2.Display Tree\n3. Inorder traversal\n4.Delete Node\nPress 0 to exit...\n");
+        printf("\n1.Add\n\n3. Inorder traversal\n4.Delete Node\nPress 0 to exit...\n");
         scanf("%d", &ch);
 
         switch (ch)
