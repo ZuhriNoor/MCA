@@ -74,7 +74,7 @@
 
     <?php
     session_start();
-    $ID = $_SESSION['qwe'];
+    $ID = $_SESSION['id'];
     if (isset($_POST["sub"])) {
         $name = $_POST["name"];
         $Rnum = $_POST["Rnum"];

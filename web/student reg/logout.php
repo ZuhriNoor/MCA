@@ -36,22 +36,13 @@
 
 <body>
     <?php
-        session_start();
-        if (isset($_SESSION["id"])){
-            echo "<h1>Welcome to Students Page</h1>
-                <div class='contain'>
-                    <a href='streg.php'><button>click Here for registration</button></a><br><br><br>
-                    <a href='markcard.php'><button>Click Here for viewing marks Card</button></a><br><br>
-                    <a href='logout.php'><button>Logout</button></a>
-                </div>";
-        } else {
-            echo "<h1>Please login to continue.</h1>
-                <div class='contain'>
-                    <a href='login.php'><button>Click here to login</button></a><br><br><br>
-                </div>";
-        }
+    session_start();
+    session_destroy();
+
+    header("Location: login.php");
     ?>
-    
+
+
 </body>
 
 </html>

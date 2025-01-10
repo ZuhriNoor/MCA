@@ -32,29 +32,52 @@
 </style>
 
 <body>
-    <h1>Please Register a Student</h1>
-    <form action="" method="post">
-        <div class="contain">
-            <table>
-                <tr>
-                    <td><label for="">Student Name</label></td>
-                    <td><input type="text" name="name"></td>
-                </tr>
-                <tr>
-                    <td><label for="">Student ID</label></td>
-                    <td><input type="text" name="ID"></td>
-                </tr>
-                <tr>
-                    <td><label for="">Password</label></td>
-                    <td><input type="password" name="pass" id=""></td>
-                </tr>
-                <tr><td></td><td><br></td></tr>
-                <tr>
-                    <td align="center" colspan="2"><input type="submit" name="sub"></td>
-                </tr>
-            </table>
-        </div>
-    </form>
+
+<?php
+    session_start();
+    if (isset($_SESSION['id'])) {
+        if ($_SESSION['id'] == "admin") {
+            echo "<h1>Please Register a Student</h1>
+                    <form action='' method='post'>
+                        <div class='contain'>
+                            <table>
+                                <tr>
+                                    <td><label>Student Name</label></td>
+                                    <td><input type='text' name='name'></td>
+                                </tr>
+                                <tr>
+                                    <td><label>Student ID</label></td>
+                                    <td><input type='text' name='ID'></td>
+                                </tr>
+                                <tr>
+                                    <td><label>Password</label></td>
+                                    <td><input type='password' name='pass' id='pass'></td>
+                                </tr>
+                                <tr><td></td><td><br></td></tr>
+                                <tr>
+                                    <td align='center' colspan='2'><input type='submit' name='sub'></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </form>";
+        }
+        else {
+            echo "<h1>You do not have access to this page.</h1>
+            <div class='contain'>
+                <a href='student.php'><button>Go to home</button></a><br><br><br>
+            </div>";
+        }
+    }
+    else {
+        echo "<h1>Please login to continue.</h1>
+            <div class='contain'>
+                <a href='login.php'><button>Click here to login</button></a><br><br><br>
+            </div>";
+    }
+    ?>
+
+
+    
 
     <?php
     if (isset($_POST["sub"])) {

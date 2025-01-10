@@ -60,8 +60,8 @@
     if (isset($_POST['sub'])) {
         $user = $_POST['Uname'];
         $pass = $_POST['pass'];
-
         if ($user == "admin" and $pass == "admin") {
+            $_SESSION["id"] = "admin";
             header("Location: admin.php");
         } else {
             $conn = mysqli_connect("localhost", "root", "", "studentreg");
@@ -76,7 +76,7 @@
                 if (mysqli_num_rows($result) != 0) {
                     if ($row['password'] == $pass) {
                         echo "$row[id]";
-                        $_SESSION["qwe"] = $row['id'];
+                        $_SESSION["id"] = $row['id'];
                         header("Location: student.php");
                     } else {    
                         echo "<h3 style={color:red;}>Password Inccorrect</h3>";

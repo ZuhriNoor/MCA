@@ -74,56 +74,71 @@
         </div>
     </form>
     <?php
-    if (isset($_POST['sub'])) {
-        $course = $_POST['course'];
-        $intern = $_POST['internal'];
-        $extern = $_POST['external'];
-        $id = $_POST['opt'];
+        session_start();
 
-        $tot = $intern + $extern;
-        if ($tot > 90) {
-            $grade = 'S';
-        } elseif ($tot > 80) {
-            $grade = 'A';
-        } elseif ($tot > 70) {
-            $grade = 'B';
-        } elseif ($tot > 60) {
-            $grade = 'C';
-        } elseif ($tot > 50) {
-            $grade = 'P';
-        } else {
-            $grade = 'F';
-        }
-
-
-        $query1 = "SELECT * from marks WHERE id='$id' and course_code='$course'";
-        $result1 = mysqli_query($con, $query1);
-
-        if(mysqli_num_rows($result1) > 0){
-            $entry = "UPDATE marks SET course_code='$course', internal='$intern', external='$extern', total='$tot', grade='$grade' WHERE id='$id'";
-            $enter = mysqli_query($con, $entry);
-
-            if ($enter) {
-                echo '<h4 color="red">Mark Entry Succesfull</h4>';
-                echo "<a href='admin.php'><button>back to admin</button></a>";
-            } else {
-                echo "Failed Update: " . mysqli_error($con);
+        if (isset($_SESSION["id"])) {
+            if ($_SESSION["id"] == "admin") {
+                if (isset($_POST['sub'])) {
+                    $course = $_POST['course'];
+                    $intern = $_POST['internal'];
+                    $extern = $_POST['external'];
+                    $id = $_POST['opt'];
+            
+                    $tot = $intern + $extern;
+                    if ($tot > 90) {
+                        $grade = 'S';
+                    } elseif ($tot > 80) {
+                        $grade = 'A';
+                    } elseif ($tot > 70) {
+                        $grade = 'B';
+                    } elseif ($tot > 60) {
+                        $grade = 'C';
+                    } elseif ($tot > 50) {
+                        $grade = 'P';
+                    } else {
+                        $grade = 'F';
+                    }
+            
+            
+                    $query1 = "SELECT * from marks WHERE id='$id' and course_code='$course'";
+                    $result1 = mysqli_query($con, $query1);
+            
+                    if(mysqli_num_rows($result1) > 0){
+                        $entry = "UPDATE marks SET course_code='$course', internal='$intern', external='$extern', total='$tot', grade='$grade' WHERE id='$id'";
+                        $enter = mysqli_query($con, $entry);
+            
+                        if ($enter) {
+                            echo '<h4 color="red">Mark Entry Succesfull</h4>';
+                            echo "<a href='admin.php'><button>back to admin</button></a>";
+                        } else {
+                            echo "Failed Update: " . mysqli_error($con);
+                        }
+                    }
+                    else 
+                    {
+                        $entry = "INSERT into marks (id, course_code, internal, external, total, grade) values ('$id','$course', '$intern', '$extern', '$tot', '$grade')";
+                        $enter = mysqli_query($con, $entry);
+                        if ($enter) {
+                            echo "<h4 color='red'>Mark Entry Succesfull</h4>";
+                            echo "<a href='admin.php'><button>back to admin</button></a>";
+                        } else {
+                            echo "Failed Update: " . mysqli_error($con);
+                        }
+                    }
+            
+                    
+                }
+            }
+            else {
+                echo "<h1>You cannot access this page.</h1>";
             }
         }
-        else 
-        {
-            $entry = "INSERT into marks (id, course_code, internal, external, total, grade) values ('$id','$course', '$intern', '$extern', '$tot', '$grade')";
-            $enter = mysqli_query($con, $entry);
-            if ($enter) {
-                echo "<h4 color='red'>Mark Entry Succesfull</h4>";
-                echo "<a href='admin.php'><button>back to admin</button></a>";
-            } else {
-                echo "Failed Update: " . mysqli_error($con);
-            }
+        else {
+            echo "<h1>Please login to continue.</h1>
+                <div class='contain'>
+                    <a href='login.php'><button>Click here to login</button></a><br><br><br>
+                </div>";
         }
-
-        
-    }
     ?>
 </body>
 
